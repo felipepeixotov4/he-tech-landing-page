@@ -197,7 +197,7 @@ const Index = () => {
               title="Consultoria Especializada"
               description="Soluções customizadas para atender as necessidades do seu hospital."
               delay="delay-200"
-              className="bg-[#0a3882] hover:bg-[#072e6e] border-[#1056c7]  text-[#0d45a6]hover:text-white"
+              className="bg-[#0a3882] hover:bg-[#072e6e] border-[#1056c7] text-[#0d45a6] hover:text-white"
             />
             <FeatureCard
               icon={<Activity size={32} className="" />}
