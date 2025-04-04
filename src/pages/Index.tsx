@@ -70,7 +70,7 @@ const Index = () => {
                 Soluções tecnológicas personalizadas para hospitais que buscam otimização, segurança e redução de custos.
               </p>
               <a 
-                href="https://wa.me/5511915002524" 
+                href="https://api.whatsapp.com/send?phone=5511915002524&text=Ol%C3%A1%20gostaria%20de%20marcar%20uma%20reuni%C3%A3o" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="cta-button inline-block animate-fade-in opacity-0 delay-300"
@@ -148,7 +148,7 @@ const Index = () => {
               
               <div className="pt-4">
                 <a 
-                  href="https://wa.me/5511915002524" 
+                  href="https://api.whatsapp.com/send?phone=5511915002524&text=Ol%C3%A1%20gostaria%20de%20marcar%20uma%20reuni%C3%A3o" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="cta-button inline-block animate-fade-in opacity-0 delay-300"
@@ -217,7 +217,7 @@ const Index = () => {
           
           <div className="text-center mt-12">
             <a 
-              href="https://wa.me/5511915002524" 
+              href="https://api.whatsapp.com/send?phone=5511915002524&text=Ol%C3%A1%20gostaria%20de%20marcar%20uma%20reuni%C3%A3o" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="bg-white text-[#0d45a6] font-medium rounded-full py-3 px-8 transition-all duration-300 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 shadow-md hover:shadow-lg inline-block animate-fade-in opacity-0 delay-300"
@@ -273,7 +273,7 @@ const Index = () => {
             Agende uma demonstração gratuita agora mesmo!
           </p>
           <a 
-            href="https://wa.me/5511915002524" 
+            href="https://api.whatsapp.com/send?phone=5511915002524&text=Ol%C3%A1%20gostaria%20de%20marcar%20uma%20reuni%C3%A3o" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="bg-white text-[#0d45a6] font-medium rounded-full py-3 px-8 transition-all duration-300 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 shadow-md hover:shadow-lg inline-block animate-fade-in opacity-0 delay-300"
