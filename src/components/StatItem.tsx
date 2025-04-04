@@ -1,8 +1,8 @@
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface StatItemProps {
-  value: string;
+  value: ReactNode;
   label: string;
   delay?: string;
 }

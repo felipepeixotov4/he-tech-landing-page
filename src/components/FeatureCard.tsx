@@ -23,9 +23,9 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
       delay,
       className
     )}>
-      <div className="text-[#0d45a6] mb-4">{icon}</div>
+      <div className="mb-4">{icon}</div>
       <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+      <p className="text-gray-200">{description}</p>
     </div>
   );
 };
