@@ -3,7 +3,7 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#f8fafc] py-12 border-t border-gray-200">
+    <footer className="bg-white py-12 border-t border-gray-200">
       <div className="container mx-auto px-4 text-center">
         <img 
           src="/lovable-uploads/64668533-f42a-434e-9015-09dc3bfa018b.png" 

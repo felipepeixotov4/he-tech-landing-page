@@ -39,10 +39,12 @@ const Navbar: React.FC = () => {
             />
           </a>
           
-          <div className="hidden md:flex space-x-8">
-            <a href="#solutions" className="text-[#0d45a6] hover:text-[#0a3882] font-medium">Soluções</a>
-            <a href="#benefits" className="text-[#0d45a6] hover:text-[#0a3882] font-medium">Benefícios</a>
-            <a href="#results" className="text-[#0d45a6] hover:text-[#0a3882] font-medium">Resultados</a>
+          <div className="hidden md:flex items-center space-x-8">
+            <div className="flex items-center space-x-8">
+              <a href="#solutions" className="text-[#0d45a6] hover:text-[#0a3882] font-medium">Soluções</a>
+              <a href="#benefits" className="text-[#0d45a6] hover:text-[#0a3882] font-medium">Benefícios</a>
+              <a href="#results" className="text-[#0d45a6] hover:text-[#0a3882] font-medium">Resultados</a>
+            </div>
             <a 
               href="https://wa.me/5511915002524" 
               target="_blank" 

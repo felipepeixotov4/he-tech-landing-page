@@ -100,34 +100,52 @@ const Index = () => {
             Os desafios da sua instituição têm solução:
           </h2>
           
-          <div className="max-w-3xl mx-auto space-y-6">
-            <SolutionItem 
-              text="Falta de integração entre setores? Reduza erros operacionais e facilite a comunicação entre departamentos."
-              delay="delay-100"
-            />
-            <SolutionItem 
-              text="Alto custo operacional? Automatize processos e elimine tarefas redundantes para cortar desperdícios."
-              delay="delay-200"
-            />
-            <SolutionItem 
-              text="Pressão para atender normas regulatórias? Tenha total conformidade com LGPD, ANVISA e CNES sem complicações."
-              delay="delay-300"
-            />
-            <SolutionItem 
-              text="Dificuldade na gestão de dados? Decida com mais precisão usando dashboards inteligentes e relatórios personalizados."
-              delay="delay-400"
-            />
-          </div>
-          
-          <div className="text-center mt-12">
-            <a 
-              href="https://wa.me/5511915002524" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="cta-button inline-block animate-fade-in opacity-0 delay-300"
-            >
-              SOLICITAR ORÇAMENTO
-            </a>
+          <div className="flex flex-col md:flex-row gap-8 items-center">
+            <div className="md:w-1/2 space-y-6">
+              <SolutionItem 
+                text="Falta de integração entre setores? Reduza erros operacionais e facilite a comunicação entre departamentos."
+                delay="delay-100"
+              />
+              <SolutionItem 
+                text="Alto custo operacional? Automatize processos e elimine tarefas redundantes para cortar desperdícios."
+                delay="delay-200"
+              />
+              <SolutionItem 
+                text="Pressão para atender normas regulatórias? Tenha total conformidade com LGPD, ANVISA e CNES sem complicações."
+                delay="delay-300"
+              />
+              <SolutionItem 
+                text="Dificuldade na gestão de dados? Decida com mais precisão usando dashboards inteligentes e relatórios personalizados."
+                delay="delay-400"
+              />
+              
+              <div className="pt-4">
+                <a 
+                  href="https://wa.me/5511915002524" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="cta-button inline-block animate-fade-in opacity-0 delay-300"
+                >
+                  SOLICITAR ORÇAMENTO
+                </a>
+              </div>
+            </div>
+            
+            <div className="md:w-1/2 animate-scale-in opacity-0 delay-200 transition-all duration-500 hover:scale-105">
+              <div className="relative rounded-xl overflow-hidden shadow-xl">
+                <img 
+                  src="/lovable-uploads/1336967b-6784-440a-9216-426ccf77e822.png" 
+                  alt="Tecnologia na saúde" 
+                  className="w-full h-auto rounded-xl" 
+                />
+                <div className="absolute inset-0 bg-[#0d45a6] opacity-10 hover:opacity-0 transition-opacity duration-300"></div>
+                
+                {/* Elementos gráficos sobrepostos */}
+                <div className="absolute top-1/4 left-1/4 w-16 h-16 bg-white/20 rounded-full backdrop-blur-sm animate-pulse"></div>
+                <div className="absolute bottom-1/3 right-1/4 w-12 h-12 bg-white/20 rounded-full backdrop-blur-sm animate-pulse" style={{animationDelay: '1s'}}></div>
+                <div className="absolute top-1/2 right-1/3 w-8 h-8 bg-white/20 rounded-full backdrop-blur-sm animate-pulse" style={{animationDelay: '1.5s'}}></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
