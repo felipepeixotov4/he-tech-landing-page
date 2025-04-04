@@ -56,7 +56,7 @@ const Index = () => {
             alt="Healthcare Technology Background" 
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/95 to-white/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 to-white/60"></div>
         </div>
         
         <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -186,32 +186,32 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <FeatureCard
-              icon={<Server size={32} className="text-white" />}
+              icon={<Server size={32} className="text-black hover:text-white" />}
               title="Implementação TASY"
               description="Integração completa para maior eficiência e redução de custos."
               delay="delay-100"
-              className="bg-[#0a3882] hover:bg-[#072e6e] border-[#1056c7] text-white"
+              className="bg-[#0a3882] hover:bg-[#072e6e] border-[#1056c7] text-black hover:text-white"
             />
             <FeatureCard
-              icon={<Users size={32} className="text-white" />}
+              icon={<Users size={32} className=" text-black hover:text-white" />}
               title="Consultoria Especializada"
               description="Soluções customizadas para atender as necessidades do seu hospital."
               delay="delay-200"
-              className="bg-[#0a3882] hover:bg-[#072e6e] border-[#1056c7] text-white"
+              className="bg-[#0a3882] hover:bg-[#072e6e] border-[#1056c7]  text-black hover:text-white"
             />
             <FeatureCard
-              icon={<Activity size={32} className="text-white" />}
+              icon={<Activity size={32} className="text-black hover:text-white" />}
               title="Dashboards e Relatórios"
               description="Dados estratégicos para tomadas de decisão mais assertivas."
               delay="delay-300"
-              className="bg-[#0a3882] hover:bg-[#072e6e] border-[#1056c7] text-white"
+              className="bg-[#0a3882] hover:bg-[#072e6e] border-[#1056c7] text-black hover:text-white"
             />
             <FeatureCard
-              icon={<AlertCircle size={32} className="text-white" />}
+              icon={<AlertCircle size={32} className="text-black hover:text-white" />}
               title="Suporte Técnico Especializado"
               description="Atendimento ágil para evitar interrupções e problemas operacionais."
               delay="delay-400"
-              className="bg-[#0a3882] hover:bg-[#072e6e] border-[#1056c7] text-white"
+              className="bg-[#0a3882] hover:bg-[#072e6e] border-[#1056c7] text-black hover:text-white"
             />
           </div>
           
