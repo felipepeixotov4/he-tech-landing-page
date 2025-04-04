@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center">
           <a href="/" className="flex items-center">
             <img 
-              src="/lovable-uploads/020b315d-4ecb-452b-9286-d06fed6ed570.png" 
+              src="/lovable-uploads/he-logo-transp.png" 
               alt="HE Tecnologia" 
               className="h-10 md:h-12"
             />
