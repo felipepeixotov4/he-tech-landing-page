@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { AlertCircle, CheckCircle, PieChart, Settings, Server, Shield, Users, Activity, BarChart3, HeartPulse } from 'lucide-react';
 import Navbar from '@/components/Navbar';
@@ -130,7 +129,7 @@ const Index = () => {
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="md:w-1/2 space-y-6">
               <SolutionItem 
-                text="Falta de integração entre setores? Reduza erros operacionais e facilite a comunicação entre departamentos."
+                text="Fim das Versões Tasy Delphi e Java: Conte com uma migração segura e descomplicada para a atualização HTML5."
                 delay="delay-100"
               />
               <SolutionItem 
@@ -187,8 +186,8 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <FeatureCard
               icon={<Server size={32} className="" />}
-              title="Implementação TASY"
-              description="Integração completa para maior eficiência e redução de custos."
+              title="Atualização de Versão Tasy"
+              description="Apoio na migração de versão para HTML5, o mais recente em inovações e design."
               delay="delay-100"
               className="bg-[#0a3882] hover:bg-[#072e6e] border-[#1056c7] text-[#0d45a6] hover:text-white"
             />
