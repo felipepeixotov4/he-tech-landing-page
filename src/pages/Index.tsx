@@ -99,19 +99,6 @@ const Index = () => {
                       <span className="text-sm font-medium">Analytics</span>
                     </div>
                   </div>
-                  <div className="mt-6 bg-slate-50 p-4 rounded-lg">
-                    <div className="flex items-center space-x-3 mb-4">
-                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                      <div className="text-sm font-medium">Sistema Integrado</div>
-                    </div>
-                    <div className="h-4 w-full bg-gray-200 rounded-full overflow-hidden mb-2">
-                      <div className="h-full bg-[#0d45a6] rounded-full" style={{ width: '87%' }}></div>
-                    </div>
-                    <div className="flex justify-between text-xs text-gray-500">
-                      <span>Integração TASY</span>
-                      <span>87%</span>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
