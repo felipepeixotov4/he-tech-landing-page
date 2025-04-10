@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { AlertCircle, CheckCircle, PieChart, Settings, Server, Shield, Users, Activity, BarChart3, HeartPulse } from 'lucide-react';
+import { AlertCircle, CheckCircle, PieChart, Settings, Server, Shield, Users, Activity, BarChart3, HeartPulse, X } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import FeatureCard from '@/components/FeatureCard';
 import SolutionItem from '@/components/SolutionItem';
@@ -10,6 +10,207 @@ import { CountUp } from '@/components/CountUp';
 const Index = () => {
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsVisible, setStatsVisible] = useState(false);
+  
+  // Estado para o formulário
+  const [formData, setFormData] = useState({
+    nome: '',
+    email: '',
+    telefone: '',
+    cargo: '',
+    empresa: '',
+    tipoEmpresa: '',
+    sistema: '',
+    servico: ''
+  });
+  
+  // Estado para validação
+  const [errors, setErrors] = useState({
+    nome: '',
+    email: '',
+    telefone: '',
+    cargo: '',
+    empresa: '',
+    tipoEmpresa: '',
+    sistema: '',
+    servico: ''
+  });
+  
+  // Estado para o modal de sucesso
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  
+  // Estado para o loading
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Função para validar os campos
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = {
+      nome: '',
+      email: '',
+      telefone: '',
+      cargo: '',
+      empresa: '',
+      tipoEmpresa: '',
+      sistema: '',
+      servico: ''
+    };
+    
+    // Validação do nome
+    if (!formData.nome.trim()) {
+      newErrors.nome = 'O nome é obrigatório';
+      isValid = false;
+    }
+    
+    // Validação do email
+    if (!formData.email.trim()) {
+      newErrors.email = 'O e-mail é obrigatório';
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'E-mail inválido';
+      isValid = false;
+    }
+    
+    // Validação do telefone
+    if (!formData.telefone.trim()) {
+      newErrors.telefone = 'O telefone é obrigatório';
+      isValid = false;
+    } else if (!/^\(\d{2}\) \d{4,5}-\d{4}$/.test(formData.telefone)) {
+      newErrors.telefone = 'Formato inválido. Use (00) 00000-0000';
+      isValid = false;
+    }
+    
+    // Validação do cargo
+    if (!formData.cargo.trim()) {
+      newErrors.cargo = 'O cargo é obrigatório';
+      isValid = false;
+    }
+    
+    // Validação da empresa
+    if (!formData.empresa.trim()) {
+      newErrors.empresa = 'O nome da empresa é obrigatório';
+      isValid = false;
+    }
+    
+    // Validação do tipo de empresa
+    if (!formData.tipoEmpresa) {
+      newErrors.tipoEmpresa = 'Selecione o tipo de empresa';
+      isValid = false;
+    }
+    
+    // Validação do sistema
+    if (!formData.sistema) {
+      newErrors.sistema = 'Selecione o sistema utilizado';
+      isValid = false;
+    }
+    
+    // Validação do serviço
+    if (!formData.servico) {
+      newErrors.servico = 'Selecione o serviço desejado';
+      isValid = false;
+    }
+    
+    setErrors(newErrors);
+    return isValid;
+  };
+  
+  // Função para formatar o telefone
+  const formatPhone = (value: string) => {
+    const phoneNumber = value.replace(/\D/g, '');
+    if (phoneNumber.length <= 2) {
+      return phoneNumber;
+    } else if (phoneNumber.length <= 7) {
+      return `(${phoneNumber.substring(0, 2)}) ${phoneNumber.substring(2)}`;
+    } else {
+      return `(${phoneNumber.substring(0, 2)}) ${phoneNumber.substring(2, 7)}-${phoneNumber.substring(7, 11)}`;
+    }
+  };
+  
+  // Função para atualizar os campos do formulário
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    
+    // Formatação especial para o campo de telefone
+    if (name === 'telefone') {
+      setFormData(prev => ({
+        ...prev,
+        [name]: formatPhone(value)
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
+    
+    // Limpa o erro do campo quando o usuário começa a digitar
+    if (errors[name as keyof typeof errors]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
+  
+  // Função para enviar o formulário
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validação dos campos
+    if (!validateForm()) {
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
+    try {
+      // Enviando os dados para a URL fornecida
+      const response = await fetch('https://hook.us1.make.celonis.com/rn9btdi21wavswdjsoh39xc03nzcuu28', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      if (response.ok) {
+        // Limpar o formulário
+        setFormData({
+          nome: '',
+          email: '',
+          telefone: '',
+          cargo: '',
+          empresa: '',
+          tipoEmpresa: '',
+          sistema: '',
+          servico: ''
+        });
+        
+        // Mostrar o modal de sucesso
+        setShowSuccessModal(true);
+      } else {
+        throw new Error('Erro ao enviar o formulário');
+      }
+    } catch (error) {
+      console.error('Erro ao enviar o formulário:', error);
+      alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  
+  // Função para fechar o modal de sucesso
+  const closeSuccessModal = () => {
+    setShowSuccessModal(false);
+  };
+  
+  // Função para fazer smooth scroll
+  const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const formSection = document.getElementById('formulario-contato');
+    if (formSection) {
+      formSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   
   // Função para animar elementos quando ficam visíveis no viewport
   useEffect(() => {
@@ -69,9 +270,8 @@ const Index = () => {
                 Soluções tecnológicas personalizadas para hospitais que buscam otimização, segurança e redução de custos.
               </p>
               <a 
-                href="https://api.whatsapp.com/send?phone=5511915002524&text=Ol%C3%A1%20gostaria%20de%20marcar%20uma%20reuni%C3%A3o" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+                href="#formulario-contato" 
+                onClick={scrollToForm}
                 className="cta-button inline-block animate-fade-in opacity-0 delay-300"
               >
                 CONVERSAR COM UM ESPECIALISTA
@@ -134,9 +334,8 @@ const Index = () => {
               
               <div className="pt-4">
                 <a 
-                  href="https://api.whatsapp.com/send?phone=5511915002524&text=Ol%C3%A1%20gostaria%20de%20marcar%20uma%20reuni%C3%A3o" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                  href="#formulario-contato" 
+                  onClick={scrollToForm}
                   className="cta-button inline-block animate-fade-in opacity-0 delay-300"
                 >
                   SOLICITAR ORÇAMENTO
@@ -203,9 +402,8 @@ const Index = () => {
           
           <div className="text-center mt-12">
             <a 
-              href="https://api.whatsapp.com/send?phone=5511915002524&text=Ol%C3%A1%20gostaria%20de%20marcar%20uma%20reuni%C3%A3o" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+              href="#formulario-contato" 
+              onClick={scrollToForm}
               className="bg-white text-[#0d45a6] font-medium rounded-full py-3 px-8 transition-all duration-300 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 shadow-md hover:shadow-lg inline-block animate-fade-in opacity-0 delay-300"
             >
               QUERO SABER MAIS
@@ -249,25 +447,175 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 md:py-20 bg-[#0d45a6] text-white">
-        <div className="container mx-auto px-4 md:px-6 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 animate-fade-in opacity-0">
+      {/* Formulário de Contato */}
+      <section id="formulario-contato" className="py-16 md:py-20 bg-[#0d45a6] text-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 animate-fade-in opacity-0">
             Fale com um Especialista e Descubra como Transformar sua Gestão
           </h2>
-          <p className="text-lg mb-10 animate-fade-in opacity-0 delay-200">
-            Agende uma demonstração gratuita agora mesmo!
+          <p className="text-lg text-center mb-10 animate-fade-in opacity-0 delay-200">
+            Preencha o formulário abaixo e um de nossos especialistas entrará em contato
           </p>
-          <a 
-            href="https://api.whatsapp.com/send?phone=5511915002524&text=Ol%C3%A1%20gostaria%20de%20marcar%20uma%20reuni%C3%A3o" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="bg-white text-[#0d45a6] font-medium rounded-full py-3 px-8 transition-all duration-300 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 shadow-md hover:shadow-lg inline-block animate-fade-in opacity-0 delay-300"
-          >
-            QUERO UMA VISITA GRATUITA
-          </a>
+          
+          <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-xl p-6 md:p-8 animate-fade-in opacity-0 delay-300">
+            <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="nome" className="block text-[#0d45a6] font-medium mb-2">Nome</label>
+                <input 
+                  type="text" 
+                  id="nome" 
+                  name="nome"
+                  value={formData.nome}
+                  onChange={handleChange}
+                  className={`text-gray-900 w-full px-4 py-2 border ${errors.nome ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#0d45a6] focus:border-transparent`}
+                  placeholder="Seu nome completo"
+                />
+                {errors.nome && <p className="text-red-500 text-sm mt-1">{errors.nome}</p>}
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="email" className="block text-[#0d45a6] font-medium mb-2">E-mail</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`text-gray-900 w-full px-4 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#0d45a6] focus:border-transparent`}
+                  placeholder="seu.email@exemplo.com"
+                />
+                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="telefone" className="block text-[#0d45a6] font-medium mb-2">Telefone</label>
+                <input 
+                  type="tel" 
+                  id="telefone" 
+                  name="telefone"
+                  value={formData.telefone}
+                  onChange={handleChange}
+                  className={`text-gray-900 w-full px-4 py-2 border ${errors.telefone ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#0d45a6] focus:border-transparent`}
+                  placeholder="(00) 00000-0000"
+                />
+                {errors.telefone && <p className="text-red-500 text-sm mt-1">{errors.telefone}</p>}
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="cargo" className="block text-[#0d45a6] font-medium mb-2">Cargo</label>
+                <input 
+                  type="text" 
+                  id="cargo" 
+                  name="cargo"
+                  value={formData.cargo}
+                  onChange={handleChange}
+                  className={`text-gray-900 w-full px-4 py-2 border ${errors.cargo ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#0d45a6] focus:border-transparent`}
+                  placeholder="Seu cargo na empresa"
+                />
+                {errors.cargo && <p className="text-red-500 text-sm mt-1">{errors.cargo}</p>}
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="empresa" className="block text-[#0d45a6] font-medium mb-2">Nome da Empresa</label>
+                <input 
+                  type="text" 
+                  id="empresa" 
+                  name="empresa"
+                  value={formData.empresa}
+                  onChange={handleChange}
+                  className={`text-gray-900 w-full px-4 py-2 border ${errors.empresa ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#0d45a6] focus:border-transparent`}
+                  placeholder="Nome da sua empresa"
+                />
+                {errors.empresa && <p className="text-red-500 text-sm mt-1">{errors.empresa}</p>}
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="tipoEmpresa" className="block text-[#0d45a6] font-medium mb-2">Tipo de Empresa</label>
+                <select 
+                  id="tipoEmpresa" 
+                  name="tipoEmpresa"
+                  value={formData.tipoEmpresa}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-2 border ${errors.tipoEmpresa ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#0d45a6] focus:border-transparent text-gray-900 bg-white`}
+                >
+                  <option value="" className="text-gray-900">Selecione uma opção</option>
+                  <option value="hospital" className="text-gray-900">Hospital</option>
+                  <option value="clinica" className="text-gray-900">Clínica</option>
+                  <option value="outros" className="text-gray-900">Outros</option>
+                </select>
+                {errors.tipoEmpresa && <p className="text-red-500 text-sm mt-1">{errors.tipoEmpresa}</p>}
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="sistema" className="block text-[#0d45a6] font-medium mb-2">Sistema Utilizado</label>
+                <select 
+                  id="sistema" 
+                  name="sistema"
+                  value={formData.sistema}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-2 border ${errors.sistema ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#0d45a6] focus:border-transparent text-gray-900 bg-white`}
+                >
+                  <option value="" className="text-gray-900">Selecione uma opção</option>
+                  <option value="tasy" className="text-gray-900">Tasy</option>
+                  <option value="mv" className="text-gray-900">MV</option>
+                  <option value="outros" className="text-gray-900">Outros</option>
+                </select>
+                {errors.sistema && <p className="text-red-500 text-sm mt-1">{errors.sistema}</p>}
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="servico" className="block text-[#0d45a6] font-medium mb-2">Qual serviço você procura?</label>
+                <select 
+                  id="servico" 
+                  name="servico"
+                  value={formData.servico}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-2 border ${errors.servico ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#0d45a6] focus:border-transparent text-gray-900 bg-white`}
+                >
+                  <option value="" className="text-gray-900">Selecione uma opção</option>
+                  <option value="atualizacao" className="text-gray-900">Atualização de Versão Tasy</option>
+                  <option value="consultoria" className="text-gray-900">Consultoria Especializada</option>
+                  <option value="dashboards" className="text-gray-900">Dashboards e Relatórios</option>
+                  <option value="suporte" className="text-gray-900">Suporte Técnico Especializado</option>
+                  <option value="Outro" className="text-gray-900">Outro Serviço</option>
+                </select>
+                {errors.servico && <p className="text-red-500 text-sm mt-1">{errors.servico}</p>}
+              </div>
+              
+              <div className="md:col-span-2 text-center mt-4">
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="bg-[#0d45a6] text-white font-medium rounded-full py-3 px-8 transition-all duration-300 hover:bg-[#0a3882] focus:outline-none focus:ring-2 focus:ring-[#0d45a6] focus:ring-opacity-50 shadow-md hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? 'ENVIANDO...' : 'ENVIAR SOLICITAÇÃO'}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
+
+      {/* Modal de Sucesso */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-xl p-6 md:p-8 max-w-md w-full animate-scale-in">
+            <div className="text-center">
+              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-[#0d45a6] mb-2">Solicitação Enviada!</h3>
+              <p className="text-gray-700 mb-6">
+                Sua solicitação foi enviada com sucesso! Um de nossos especialistas entrará em contato em breve.
+              </p>
+              <button 
+                onClick={closeSuccessModal}
+                className="bg-[#0d45a6] text-white font-medium rounded-full py-2 px-6 transition-all duration-300 hover:bg-[#0a3882] focus:outline-none focus:ring-2 focus:ring-[#0d45a6] focus:ring-opacity-50 shadow-md hover:shadow-lg"
+              >
+                FECHAR
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>
