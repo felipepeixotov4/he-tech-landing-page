@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -31,9 +30,9 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
-          <a href="/" className="flex items-center">
+          <a href="/lp/" className="flex items-center">
             <img 
-              src="/lovable-uploads/he-logo-transp.png" 
+              src="/lp/lovable-uploads/he-logo-transp.png" 
               alt="HE Tecnologia" 
               className="h-10 md:h-12"
             />

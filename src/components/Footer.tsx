@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Footer: React.FC = () => {
@@ -6,7 +5,7 @@ const Footer: React.FC = () => {
     <footer className="bg-white py-12 border-t border-gray-200">
       <div className="container mx-auto px-4 text-center">
         <img 
-          src="/lovable-uploads/64668533-f42a-434e-9015-09dc3bfa018b.png" 
+          src="/lp/lovable-uploads/64668533-f42a-434e-9015-09dc3bfa018b.png" 
           alt="HE Tecnologia" 
           className="h-16 mx-auto mb-6"
         />
