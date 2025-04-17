@@ -11,7 +11,6 @@ const Index = () => {
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsVisible, setStatsVisible] = useState(false);
   
-  // Estado para o formulário
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
@@ -23,7 +22,6 @@ const Index = () => {
     servico: ''
   });
   
-  // Estado para validação
   const [errors, setErrors] = useState({
     nome: '',
     email: '',
@@ -35,13 +33,10 @@ const Index = () => {
     servico: ''
   });
   
-  // Estado para o modal de sucesso
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   
-  // Estado para o loading
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  // Função para validar os campos
   const validateForm = () => {
     let isValid = true;
     const newErrors = {
@@ -55,13 +50,11 @@ const Index = () => {
       servico: ''
     };
     
-    // Validação do nome
     if (!formData.nome.trim()) {
       newErrors.nome = 'O nome é obrigatório';
       isValid = false;
     }
     
-    // Validação do email
     if (!formData.email.trim()) {
       newErrors.email = 'O e-mail é obrigatório';
       isValid = false;
@@ -70,7 +63,6 @@ const Index = () => {
       isValid = false;
     }
     
-    // Validação do telefone
     if (!formData.telefone.trim()) {
       newErrors.telefone = 'O telefone é obrigatório';
       isValid = false;
@@ -79,31 +71,26 @@ const Index = () => {
       isValid = false;
     }
     
-    // Validação do cargo
     if (!formData.cargo.trim()) {
       newErrors.cargo = 'O cargo é obrigatório';
       isValid = false;
     }
     
-    // Validação da empresa
     if (!formData.empresa.trim()) {
       newErrors.empresa = 'O nome da empresa é obrigatório';
       isValid = false;
     }
     
-    // Validação do tipo de empresa
     if (!formData.tipoEmpresa) {
       newErrors.tipoEmpresa = 'Selecione o tipo de empresa';
       isValid = false;
     }
     
-    // Validação do sistema
     if (!formData.sistema) {
       newErrors.sistema = 'Selecione o sistema utilizado';
       isValid = false;
     }
     
-    // Validação do serviço
     if (!formData.servico) {
       newErrors.servico = 'Selecione o serviço desejado';
       isValid = false;
@@ -113,7 +100,6 @@ const Index = () => {
     return isValid;
   };
   
-  // Função para formatar o telefone
   const formatPhone = (value: string) => {
     const phoneNumber = value.replace(/\D/g, '');
     if (phoneNumber.length <= 2) {
@@ -125,11 +111,9 @@ const Index = () => {
     }
   };
   
-  // Função para atualizar os campos do formulário
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     
-    // Formatação especial para o campo de telefone
     if (name === 'telefone') {
       setFormData(prev => ({
         ...prev,
@@ -142,7 +126,6 @@ const Index = () => {
       }));
     }
     
-    // Limpa o erro do campo quando o usuário começa a digitar
     if (errors[name as keyof typeof errors]) {
       setErrors(prev => ({
         ...prev,
@@ -151,11 +134,9 @@ const Index = () => {
     }
   };
   
-  // Função para enviar o formulário
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validação dos campos
     if (!validateForm()) {
       return;
     }
@@ -163,7 +144,6 @@ const Index = () => {
     setIsSubmitting(true);
     
     try {
-      // Enviando os dados para a URL fornecida
       const response = await fetch('https://hook.us1.make.celonis.com/rn9btdi21wavswdjsoh39xc03nzcuu28', {
         method: 'POST',
         headers: {
@@ -173,7 +153,6 @@ const Index = () => {
       });
       
       if (response.ok) {
-        // Limpar o formulário
         setFormData({
           nome: '',
           email: '',
@@ -185,7 +164,6 @@ const Index = () => {
           servico: ''
         });
         
-        // Mostrar o modal de sucesso
         setShowSuccessModal(true);
       } else {
         throw new Error('Erro ao enviar o formulário');
@@ -198,12 +176,10 @@ const Index = () => {
     }
   };
   
-  // Função para fechar o modal de sucesso
   const closeSuccessModal = () => {
     setShowSuccessModal(false);
   };
   
-  // Função para fazer smooth scroll
   const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const formSection = document.getElementById('formulario-contato');
@@ -212,14 +188,12 @@ const Index = () => {
     }
   };
   
-  // Função para animar elementos quando ficam visíveis no viewport
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           
-          // Check if this is the stats section
           if (entry.target === statsRef.current) {
             setStatsVisible(true);
           }
@@ -230,7 +204,6 @@ const Index = () => {
     const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-scale-in, .animate-slide-in-left');
     animatedElements.forEach(el => observer.observe(el));
     
-    // Observe stats section
     if (statsRef.current) {
       observer.observe(statsRef.current);
     }
@@ -247,9 +220,7 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      {/* Hero Section with Background Image */}
       <section className="pt-32 pb-20 md:pt-40 md:pb-28 relative bg-gradient-to-b from-slate-50 to-white">
-        {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
             src="/lp/lovable-uploads/f445ab51-46cc-4b8f-86f6-4a8e36286748.png" 
@@ -306,7 +277,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Challenges Section */}
       <section id="benefits" className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-[#0d45a6] mb-12 animate-fade-in opacity-0">
@@ -352,7 +322,6 @@ const Index = () => {
                 />
                 <div className="absolute inset-0 bg-[#0d45a6] opacity-10 hover:opacity-0 transition-opacity duration-300"></div>
                 
-                {/* Elementos gráficos sobrepostos */}
                 <div className="absolute top-1/4 left-1/4 w-16 h-16 bg-white/20 rounded-full backdrop-blur-sm animate-pulse"></div>
                 <div className="absolute bottom-1/3 right-1/4 w-12 h-12 bg-white/20 rounded-full backdrop-blur-sm animate-pulse" style={{animationDelay: '1s'}}></div>
                 <div className="absolute top-1/2 right-1/3 w-8 h-8 bg-white/20 rounded-full backdrop-blur-sm animate-pulse" style={{animationDelay: '1.5s'}}></div>
@@ -362,7 +331,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Solutions Section with Blue Background */}
       <section id="solutions" className="py-16 md:py-20 bg-[#0d45a6] text-white">
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-12 animate-fade-in opacity-0">
@@ -412,7 +380,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Results Section with Animated Numbers */}
       <section id="results" className="py-16 md:py-20 bg-white" ref={statsRef}>
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-[#0d45a6] mb-12 animate-fade-in opacity-0">
@@ -447,7 +414,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Formulário de Contato */}
       <section id="formulario-contato" className="py-16 md:py-20 bg-[#0d45a6] text-white">
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 animate-fade-in opacity-0">
@@ -596,7 +562,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Modal de Sucesso */}
       {showSuccessModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl p-6 md:p-8 max-w-md w-full animate-scale-in">

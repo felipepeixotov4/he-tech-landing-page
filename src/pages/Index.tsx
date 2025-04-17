@@ -11,14 +11,12 @@ const Index = () => {
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsVisible, setStatsVisible] = useState(false);
   
-  // Função para animar elementos quando ficam visíveis no viewport
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           
-          // Check if this is the stats section
           if (entry.target === statsRef.current) {
             setStatsVisible(true);
           }
@@ -29,7 +27,6 @@ const Index = () => {
     const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-scale-in, .animate-slide-in-left');
     animatedElements.forEach(el => observer.observe(el));
     
-    // Observe stats section
     if (statsRef.current) {
       observer.observe(statsRef.current);
     }
@@ -46,9 +43,7 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      {/* Hero Section with Background Image */}
       <section className="pt-32 pb-20 md:pt-40 md:pb-28 relative bg-gradient-to-b from-slate-50 to-white">
-        {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
             src="/lp/lovable-uploads/f445ab51-46cc-4b8f-86f6-4a8e36286748.png" 
@@ -106,7 +101,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Challenges Section */}
       <section id="benefits" className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-[#0d45a6] mb-12 animate-fade-in opacity-0">
@@ -153,7 +147,6 @@ const Index = () => {
                 />
                 <div className="absolute inset-0 bg-[#0d45a6] opacity-10 hover:opacity-0 transition-opacity duration-300"></div>
                 
-                {/* Elementos gráficos sobrepostos */}
                 <div className="absolute top-1/4 left-1/4 w-16 h-16 bg-white/20 rounded-full backdrop-blur-sm animate-pulse"></div>
                 <div className="absolute bottom-1/3 right-1/4 w-12 h-12 bg-white/20 rounded-full backdrop-blur-sm animate-pulse" style={{animationDelay: '1s'}}></div>
                 <div className="absolute top-1/2 right-1/3 w-8 h-8 bg-white/20 rounded-full backdrop-blur-sm animate-pulse" style={{animationDelay: '1.5s'}}></div>
@@ -163,7 +156,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Solutions Section with Blue Background */}
       <section id="solutions" className="py-16 md:py-20 bg-[#0d45a6] text-white">
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-12 animate-fade-in opacity-0">
@@ -214,7 +206,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Results Section with Animated Numbers */}
       <section id="results" className="py-16 md:py-20 bg-white" ref={statsRef}>
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-[#0d45a6] mb-12 animate-fade-in opacity-0">
@@ -249,7 +240,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-16 md:py-20 bg-[#0d45a6] text-white">
         <div className="container mx-auto px-4 md:px-6 text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-8 animate-fade-in opacity-0">
